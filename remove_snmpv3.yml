@@ -1,6 +1,6 @@
 ---
 # Example Usage:
-# ansible-playbook -i inventory add_snmpv3.yml -e user=snmpUser2 -e auth=MD5 -e password=mypassword -e priv=AES -e passphrase=mypassword
+# ansible-playbook -i inventory remove_snmpv3.yml -e user=snmpUser2
 - hosts: all
   vars:
     # prefix: ''
@@ -12,17 +12,23 @@
     service:
       name: snmpd
       state: stopped
-  - name: add createUser <snmp username> MD5 <password> DES <passphrase> to /var/lib/net-snmp/snmpd.conf
+  - name: remove createUser <user>...
+    lineinfile:
+      path: '{{prefix}}/test/var/lib/net-snmp/snmpd.conf'
+      regex: '^createUser {{user}}'
+      state: absent
+      backup: yes
+  - name: remove usmUser...<user>
     lineinfile:
       path: '{{prefix}}/var/lib/net-snmp/snmpd.conf'
-      line: 'createUser {{user}} {{auth}} {{password}} {{priv}} {{passphrase}}'
-      state: present
+      regex: '^usmUser*\"{{user}}'
+      state: absent
       backup: yes
-  - name: add rwuser <snmp username>
+  - name: remove rwuser <snmp username>
     lineinfile:
-      path: '{{prefix}}/etc/snmp/snmpd.conf' 
+      path: '{{prefix}}/etc/snmp/snmpd.conf'
       line: 'rwuser {{user}}'
-      state: present
+      state: absent
       backup: yes 
   - name: start snmpd on remote
     service:
