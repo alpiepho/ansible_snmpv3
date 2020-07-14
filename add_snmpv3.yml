@@ -1,0 +1,30 @@
+---
+# Example Usage:
+# ansible-playbook -i inventory add_snmpv3.yml -e user=snmpUser -e auth=MD5 -e password=mypassword -e priv=AES -e passphrase=mypassword
+- hosts: all
+  remote_user: sysadmin
+  become: yes
+  tasks:
+  - name: stop snmpd on remote
+    service:
+      name: snmpd
+      state: stopped
+  - name: add createUser <snmp username> MD5 <password> DES <passphrase> to /var/lib/net-snmp/snmpd.conf
+    lineinfile:
+      # TODO rm /home/sysadmin/test
+      path: /home/sysadmin/test/var/lib/net-snmp/snmpd.conf
+      line: 'createUser {{user}} {{auth}} {{password}} {{priv}} {{passphrase}}'
+      state: present
+      backup: yes
+  - name: add rwuser <snmp username>
+    lineinfile:
+      # TODO rm /home/sysadmin/test
+      path: /home/sysadmin/test/etc/snmp/snmpd.conf 
+      line: 'rwuser {{user}}'
+      state: present
+      backup: yes 
+  - name: start snmpd on remote
+    service:
+      name: snmpd
+      state: started
+      
