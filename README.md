@@ -66,3 +66,9 @@ $EDITOR  /etc/snmp/snmpd.conf
 [find and remove *rouser* and *rwuser* info for "username"]
 service start snmpd
 </pre>
+
+## Links to Learn about Ansible
+
+https://medium.com/@brad.simonin/learning-ansible-with-centos-7-linux-12461043fd02
+
+
