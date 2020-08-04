@@ -11,11 +11,11 @@ sudo systemctl stop snmpd
 
 sudo vi /var/lib/net-snmp/snmpd.conf
 # ALWAYS add to bottom, will be removed when snmpd re-started
-# createUser <snmp username> MD5 <password> DES <passphrase> 
+# createUser "username" MD5 "password" DES "passphrase" 
 
 sudo vi /etc/snmp/snmpd.conf 
 # REPLACE or add to bottom (once)
-# rwuser <snmp username>
+# rwuser "username"
 
 sudo systemctl start snmpd
 </pre>
@@ -61,8 +61,8 @@ TBD : create snmpv3.yml to remove lines
 <pre>
 service stop snmpd
 $EDITOR  /var/lib/net-snmp/snmpd.conf
-[find and remove *usmUser* info]
+[find and remove line starting with "username"]
 $EDITOR  /etc/snmp/snmpd.conf
-[find and remove *rouser* and *rwuser* info]
+[find and remove *rouser* and *rwuser* info for "username"]
 service start snmpd
 </pre>
