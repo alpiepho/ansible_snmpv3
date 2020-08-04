@@ -46,6 +46,8 @@ Use command line like the following:
 ansible-playbook -i inventory -u sysadmin add_snmpv3.yml -e user=snmpUser -e auth=MD5 -e password=mypassword -e priv=AES -e passphrase=mypassword
 </pre>
 
+<b>WARNING:</b> Inspect the .yml file and verify that 'prefix' is set to empty.
+
 
 ## Switch over global SNMPv3 Settings
 TBD
