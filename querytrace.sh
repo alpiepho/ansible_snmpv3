@@ -26,7 +26,6 @@ do
   host=${host/\/tmp\/client_query_trace_//}
   host=${host/\//}
   host=${host/.txt/}
-   echo $host
 
   if grep -Fxq "[" $f
   then
@@ -45,12 +44,13 @@ do
 done
 
 # remove blank lines and sort results file
-sed -i '/^$/d' $resultname
+sed -i -e '/^$/d' $resultname
 sort -o $resultname $resultname
 
 # add header line 
-# Timestamp	DNS Server	Client IP Address	QType	Domain Name
-sed -i '1 i\Timestamp,DNS Server,Client IP Address,QType,Domain Name' $resultname
+echo "Timestamp,DNS Server,Client IP Address,QType,Domain Name" > $resultname.bak 
+cat $resultname >> $resultname.bak
+mv $resultname.bak $resultname
 
 # conver to tabs
 sed -i -e "s/,/	/g" $resultname
@@ -59,7 +59,4 @@ sed -i -e "s/,/	/g" $resultname
 rm -f /tmp/client_query_*.txt
 
 echo "Results in $resultname"
-
-#DEBUG
-cat $resultname
 
