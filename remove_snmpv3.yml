@@ -1,10 +1,11 @@
 ---
 # Example Usage:
 # ansible-playbook -i inventory remove_snmpv3.yml -e user=snmpUser2
+# NOTE: will not work if user name has underscore
 - hosts: all
   vars:
-    # prefix: ''
-    prefix: /home/sysadmin/test
+    prefix: ''
+    # prefix: /home/sysadmin/test
   remote_user: sysadmin
   become: yes
   tasks:

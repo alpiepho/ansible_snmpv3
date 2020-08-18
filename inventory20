@@ -1,0 +1,21 @@
+[all]
+server101_20_001 ansible_ssh_host=192.168.121.101
+server101_20_002 ansible_ssh_host=192.168.121.101
+server101_20_003 ansible_ssh_host=192.168.121.101
+server101_20_004 ansible_ssh_host=192.168.121.101
+server101_20_005 ansible_ssh_host=192.168.121.101
+server101_20_006 ansible_ssh_host=192.168.121.101
+server101_20_007 ansible_ssh_host=192.168.121.101
+server101_20_008 ansible_ssh_host=192.168.121.101
+server101_20_009 ansible_ssh_host=192.168.121.101
+server101_20_010 ansible_ssh_host=192.168.121.101
+server101_20_011 ansible_ssh_host=192.168.121.101
+server101_20_012 ansible_ssh_host=192.168.121.101
+server101_20_013 ansible_ssh_host=192.168.121.101
+server101_20_014 ansible_ssh_host=192.168.121.101
+server101_20_015 ansible_ssh_host=192.168.121.101
+server101_20_016 ansible_ssh_host=192.168.121.101
+server101_20_017 ansible_ssh_host=192.168.121.101
+server101_20_018 ansible_ssh_host=192.168.121.101
+server101_20_019 ansible_ssh_host=192.168.121.101
+server101_20_020 ansible_ssh_host=192.168.121.101

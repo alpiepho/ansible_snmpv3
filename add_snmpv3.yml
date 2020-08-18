@@ -3,8 +3,8 @@
 # ansible-playbook -i inventory add_snmpv3.yml -e user=snmpUser2 -e auth=MD5 -e password=mypassword -e priv=AES -e passphrase=mypassword
 - hosts: all
   vars:
-    # prefix: ''
-    prefix: /home/sysadmin/test
+    prefix: ''
+    # prefix: /home/sysadmin/test
   remote_user: sysadmin
   become: yes
   tasks:

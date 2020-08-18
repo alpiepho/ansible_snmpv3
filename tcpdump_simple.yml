@@ -1,0 +1,32 @@
+---
+# Example Usage:
+# ansible-playbook -i inventory tcpdump_simple.yml -e pcap_file=/trace.pcap
+# based on gist at: https://gist.github.com/btotr/22d9b239ab6b50b608be58285422cd24
+
+- hosts: all
+  vars:
+    prefix: ''
+    # prefix: /home/sysadmin/test
+  remote_user: sysadmin
+  become: yes
+  tasks:
+  - name: start tcpdump
+    command: /usr/sbin/tcpdump -i any -s 0 -w /tmp/{{ pcap_file }}
+    async: 60
+    poll: 0
+
+  - pause: minutes=1 prompt="pause for 60 seconds or press Ctrl + c then c to continue"
+
+  - name: kill tcpdump
+    command: /usr/bin/pkill tcpdump
+
+  - name: compress capture file
+    command: gzip {{ pcap_file }} chdir=/tmp
+
+  - name: copy logs to local boxes webroot
+    fetch: src=/tmp/{{ pcap_file }}.gz dest=/tmp/ flat=yes
+
+  - name: remove files from server
+    file: path=/tmp/{{ pcap_file }}.gz state=absent
+
+
